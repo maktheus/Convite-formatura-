@@ -31,8 +31,9 @@ estilo papel, tipografia Garamond e ilustração de capa em tela cheia.
   pétalas e o toque as desfaz em fagulhas.
 - **Botões de ligar/desligar** som e animações (canto inferior direito),
   persistidos em `localStorage`; a página respeita `prefers-reduced-motion`.
-- **Exibição sempre na horizontal** — em aparelhos na vertical o layout é
-  girado 90° via CSS (e `screen.orientation.lock` onde o navegador deixa).
+- **Versão mobile dedicada** — tipografia, espaçamentos, enquadramento da
+  capa, botões em largura total e áreas seguras (notch) ajustados para
+  telas estreitas.
 - **Revelação suave das seções** ao rolar.
 
 ## Personalização
