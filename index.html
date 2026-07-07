@@ -489,7 +489,7 @@
   const CONFIG = {
     petalDensity: 26,      // como no design (prop petalDensity)
     ambientVolume: 0.5,    // como no design (prop ambientVolume)
-    playlistId: "PL1u2mFP_3-VSLtTYbXvhoyJonZJt_8-WF",
+    videoId: "2E_qlyy5N-I",   // música do convite (toca em loop)
   };
 
   /* =====================================================
@@ -667,7 +667,9 @@
   window.onYouTubeIframeAPIReady = () => {
     ytPlayer = new YT.Player("yt-player", {
       width: "240", height: "135",
-      playerVars: { listType: "playlist", list: CONFIG.playlistId, loop: 1, playsinline: 1, rel: 0 },
+      videoId: CONFIG.videoId,
+      // para um vídeo único repetir, o parâmetro playlist recebe o próprio ID
+      playerVars: { loop: 1, playlist: CONFIG.videoId, playsinline: 1, rel: 0 },
       events: {
         onReady: (e) => {
           ytReady = true; ytFailed = false;
