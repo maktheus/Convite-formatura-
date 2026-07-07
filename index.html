@@ -332,39 +332,46 @@
   /* ---------- versão mobile (retrato) ---------- */
   @media (max-width: 640px) {
     .hero { min-height: 0; }
-    .hero img.capa { object-position: center 38%; }   /* arte vertical dedicada ao mobile */
+    .hero img.capa { object-position: center; }   /* arte vertical centralizada */
     .hero .topo { padding-top: calc(34px + env(safe-area-inset-top, 0px)); }
-    .hero .eyebrow { font-size: 13px; letter-spacing: 0.34em; }
+    .hero .eyebrow { font-size: 14px; letter-spacing: 0.34em; }
     .hero .base { bottom: 9vh; }
-    .hero h1 { font-size: clamp(30px, 8.4vw, 40px); }
+    .hero h1 { font-size: clamp(36px, 10vw, 48px); }
     .hero .data-row { margin-top: 20px; gap: 12px; }
     .hero .data-row .fio { width: 28px; }
-    .hero .data-row .data { font-size: 15px; letter-spacing: 0.22em; }
+    .hero .data-row .data { font-size: 17px; letter-spacing: 0.22em; }
 
     .historia { padding: 64px 26px 44px; }
-    .historia .lead { font-size: 23px; }
-    .historia p { font-size: 17px; line-height: 1.8; }
+    .historia .lead { font-size: 26px; }
+    .historia p { font-size: 19px; line-height: 1.8; }
 
     .formando { padding: 16px 26px 56px; }
-    .formando .curso { font-size: 16px; }
+    .formando .rotulo { font-size: 15px; }
+    .formando h2 { font-size: 36px; }
+    .formando .curso { font-size: 18px; }
 
     .detalhes { padding: 0 18px 64px; }
     .detalhes .cartao { padding: 40px 26px; }
     .detalhes .grade { gap: 32px; }
-    .detalhes .valor { font-size: 24px; }
+    .detalhes .rotulo { font-size: 14px; }
+    .detalhes .valor { font-size: 27px; }
+    .detalhes .nota { font-size: 17px; }
     .detalhes .mapa-wrap { margin-top: 36px; }
-    .btn-mapa { width: 100%; justify-content: center; }
+    .btn-mapa { width: 100%; justify-content: center; font-size: 16px; }
 
     .rsvp { padding: 0 26px 72px; }
-    .rsvp .prazo { font-size: 17px; }
+    .rsvp .rotulo { font-size: 15px; }
+    .rsvp .prazo { font-size: 19px; }
     .rsvp .botoes { flex-direction: column; align-items: stretch; gap: 12px; }
-    .btn-sim, .btn-nao { width: 100%; }
+    .btn-sim, .btn-nao { width: 100%; font-size: 17px; }
 
     .citacao { padding: 64px 26px 128px; }
-    .citacao .assina-frase { margin-top: 36px; }
-    .citacao .assina-nome { margin-top: 32px; }
+    .citacao blockquote { font-size: 27px; }
+    .citacao .assina-frase { margin-top: 36px; font-size: 18px; }
+    .citacao .assina-nome { margin-top: 32px; font-size: 24px; }
     .citacao .foto-mae { margin-top: 40px; }
     .citacao .foto-mae img { width: 96px; height: 96px; }
+    .citacao .foto-legenda { font-size: 16px; }
 
     #trilha { left: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); width: 186px; }
     #trilha .trilha-video { width: 186px; height: 105px; }
@@ -374,9 +381,11 @@
     .ctrl-btn { width: 46px; height: 46px; font-size: 18px; }
 
     #intro { gap: 22px; }
-    #intro h2 { font-size: 30px; }
-    .intro-tips .tip { font-size: 15px; padding: 12px 15px; }
-    .btn-abrir { width: min(340px, 100%); }
+    #intro .eyebrow { font-size: 15px; }
+    #intro h2 { font-size: 34px; }
+    .intro-tips .tip { font-size: 17px; padding: 13px 16px; }
+    .btn-abrir { width: min(340px, 100%); font-size: 17px; }
+    #intro .mini { font-size: 15px; }
   }
 </style>
 </head>
