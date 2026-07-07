@@ -258,10 +258,22 @@
     box-shadow: 0 10px 30px -10px rgba(61,74,82,0.35);
   }
   #trilha.on { display: block; }
+  #trilha .trilha-topo {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 5px 6px 5px 12px;
+  }
   #trilha .trilha-titulo {
     font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase;
-    color: var(--label); padding: 8px 12px; text-align: center;
+    color: var(--label);
   }
+  #trilha .trilha-fechar {
+    cursor: pointer; border: none; background: none;
+    width: 26px; height: 26px; border-radius: 50%;
+    color: var(--label); font-size: 14px; line-height: 1;
+    display: grid; place-items: center;
+    transition: background 0.3s, color 0.3s;
+  }
+  #trilha .trilha-fechar:hover { background: rgba(179,154,91,0.15); color: var(--gold-ink); }
   #trilha .trilha-video { width: 240px; height: 135px; }
   #trilha iframe { display: block; width: 100%; height: 100%; border: 0; }
 
@@ -336,12 +348,27 @@
       height: auto; min-height: 0;
       aspect-ratio: 941 / 1672;
       max-height: var(--appH, 100vh);
+      overflow: visible;
     }
     /* se a tela for curta demais e houver corte, ancora no formando */
-    .hero img.capa { object-position: 72% center; }
-    .hero .topo { padding-top: calc(34px + env(safe-area-inset-top, 0px)); }
-    .hero .eyebrow { font-size: 14px; letter-spacing: 0.34em; }
-    .hero .base { bottom: 6%; }
+    .hero img.capa {
+      object-position: 72% center;
+      /* bordas se dissolvem no papel: fade vertical + horizontal */
+      -webkit-mask-image:
+        linear-gradient(180deg, rgba(0,0,0,0) 0%, #000 9%, #000 72%, rgba(0,0,0,0) 99%),
+        linear-gradient(90deg, rgba(0,0,0,0) 0%, #000 8%, #000 92%, rgba(0,0,0,0) 100%);
+      -webkit-mask-composite: source-in;
+      mask-image:
+        linear-gradient(180deg, rgba(0,0,0,0) 0%, #000 9%, #000 72%, rgba(0,0,0,0) 99%),
+        linear-gradient(90deg, rgba(0,0,0,0) 0%, #000 8%, #000 92%, rgba(0,0,0,0) 100%);
+      mask-composite: intersect;
+    }
+    /* com o fade da própria imagem, os véus saem e o rótulo fica escuro */
+    .hero .veu-alto, .hero .veu-baixo { display: none; }
+    .hero .topo { padding-top: calc(30px + env(safe-area-inset-top, 0px)); }
+    .hero .eyebrow { color: var(--label); text-shadow: none; font-size: 14px; letter-spacing: 0.34em; }
+    .hero .fio-claro { background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .hero .base { bottom: 4%; }
     .hero h1 { font-size: clamp(36px, 10vw, 48px); }
     .hero .data-row { margin-top: 20px; gap: 12px; }
     .hero .data-row .fio { width: 28px; }
@@ -381,7 +408,8 @@
 
     #trilha { left: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); width: 186px; }
     #trilha .trilha-video { width: 186px; height: 105px; }
-    #trilha .trilha-titulo { font-size: 11px; padding: 6px 10px; }
+    #trilha .trilha-topo { padding: 4px 4px 4px 10px; }
+    #trilha .trilha-titulo { font-size: 11px; }
 
     .controls { right: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); gap: 10px; }
     .ctrl-btn { width: 46px; height: 46px; font-size: 18px; }
@@ -508,7 +536,10 @@
 
   <!-- trilha da jornada: playlist no player oficial do YouTube -->
   <div id="trilha">
-    <div class="trilha-titulo">♪ trilha da jornada</div>
+    <div class="trilha-topo">
+      <span class="trilha-titulo">♪ trilha da jornada</span>
+      <button class="trilha-fechar" id="trilha-fechar" title="Fechar música" aria-label="Fechar a música">✕</button>
+    </div>
     <div class="trilha-video"><div id="yt-player"></div></div>
   </div>
 
@@ -832,6 +863,13 @@
     state.sound = !state.sound;
     localStorage.setItem("convite_som", state.sound ? "1" : "0");
     btnSound.setAttribute("aria-pressed", String(state.sound));
+    syncSound();
+  });
+  // botão ✕ do mini-player: desliga a música (mesmo efeito do toggle de som)
+  document.getElementById("trilha-fechar").addEventListener("click", () => {
+    state.sound = false;
+    localStorage.setItem("convite_som", "0");
+    btnSound.setAttribute("aria-pressed", "false");
     syncSound();
   });
   applyAnim();
