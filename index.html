@@ -238,6 +238,23 @@
   }
   .citacao .assina-frase { margin-top: 44px; font-size: 17px; letter-spacing: 0.08em; color: var(--sage); font-style: italic; }
   .citacao .assina-nome { margin-top: 40px; font-family: var(--display); font-size: 22px; color: var(--ink-strong); }
+  .citacao .foto-mae {
+    margin-top: 48px;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .citacao .foto-mae img {
+    width: 112px; height: 112px; border-radius: 50%;
+    object-fit: cover; display: block;
+    padding: 4px; background: var(--paper-2);
+    border: 1px solid var(--gold);
+    box-shadow: 0 12px 30px -12px rgba(61,74,82,0.35);
+    transition: transform 0.3s;
+  }
+  .citacao .foto-mae img:hover { transform: scale(1.06) rotate(-2deg); }
+  .citacao .foto-legenda {
+    font-size: 15px; font-style: italic; color: var(--muted);
+    letter-spacing: 0.04em;
+  }
 
   /* ---------- revelar ao rolar (camada extra, sutil) ---------- */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
@@ -422,6 +439,10 @@
           <blockquote>“Toda jornada chega ao fim. Mas, às vezes, é justamente no fim que descobrimos onde a próxima começa.”</blockquote>
           <div class="assina-frase">Espero celebrar esse novo começo ao seu lado.</div>
           <div class="assina-nome">Matheus</div>
+          <div class="foto-mae">
+            <img src="assets/matheus.jpg" alt="Matheus quando criança">
+            <div class="foto-legenda">a foto foi escolhida pela minha mãe 🫠</div>
+          </div>
         </div>
       </section>
 
