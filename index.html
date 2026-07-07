@@ -331,19 +331,31 @@
 
   /* ---------- versão mobile (retrato) ---------- */
   @media (max-width: 640px) {
-    /* hero com a mesma proporção da arte: imagem inteira, sem corte */
+    /* arte emoldurada com padding proporcional à tela: nunca corta,
+       pois a altura da imagem segue a proporção do próprio arquivo */
     .hero {
-      height: auto; min-height: 0;
-      aspect-ratio: 941 / 1672;
-      max-height: var(--appH, 100vh);
+      height: auto; min-height: 0; max-height: none;
+      overflow: visible;
+      display: flex; flex-direction: column;
+      padding: calc(18px + env(safe-area-inset-top, 0px)) 4.5vw 0;
     }
-    /* se a tela for curta demais e houver corte, ancora no formando */
-    .hero img.capa { object-position: 72% center; }
-    .hero .topo { padding-top: calc(34px + env(safe-area-inset-top, 0px)); }
-    .hero .eyebrow { font-size: 14px; letter-spacing: 0.34em; }
-    .hero .base { bottom: 6%; }
-    .hero h1 { font-size: clamp(36px, 10vw, 48px); }
-    .hero .data-row { margin-top: 20px; gap: 12px; }
+    .hero .veu-alto, .hero .veu-baixo { display: none; }
+    .hero .topo { position: static; order: -1; padding: 0 0 16px; }
+    .hero .eyebrow {
+      color: var(--label); text-shadow: none;
+      font-size: 14px; letter-spacing: 0.34em;
+    }
+    .hero .fio-claro { background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .hero picture { display: block; }
+    .hero img.capa {
+      position: static; display: block;
+      width: 100%; height: auto;
+      border-radius: 8px;
+      box-shadow: 0 20px 48px -20px rgba(61,74,82,0.45);
+    }
+    .hero .base { position: static; padding: 26px 12px 6px; }
+    .hero h1 { font-size: clamp(32px, 9vw, 44px); text-shadow: none; }
+    .hero .data-row { margin-top: 18px; gap: 12px; }
     .hero .data-row .fio { width: 28px; }
     .hero .data-row .data { font-size: 17px; letter-spacing: 0.22em; }
 
