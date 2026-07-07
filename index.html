@@ -332,7 +332,7 @@
   /* ---------- versão mobile (retrato) ---------- */
   @media (max-width: 640px) {
     .hero { min-height: 0; }
-    .hero img.capa { object-position: 64% 30%; }   /* mantém o formando no quadro */
+    .hero img.capa { object-position: center 38%; }   /* arte vertical dedicada ao mobile */
     .hero .topo { padding-top: calc(34px + env(safe-area-inset-top, 0px)); }
     .hero .eyebrow { font-size: 13px; letter-spacing: 0.34em; }
     .hero .base { bottom: 9vh; }
@@ -388,7 +388,10 @@
 
       <!-- ===== HERO ===== -->
       <section class="hero">
-        <img class="capa" src="assets/capa.jpg" alt="Formando contemplando o horizonte em uma paisagem de fantasia">
+        <picture>
+          <source media="(max-width: 640px)" srcset="assets/capa-mobile.jpg">
+          <img class="capa" src="assets/capa.jpg" alt="Formando contemplando o horizonte em uma paisagem de fantasia">
+        </picture>
         <div class="veu-baixo"></div>
         <div class="veu-alto"></div>
         <div class="topo">
