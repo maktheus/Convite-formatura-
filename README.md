@@ -1,42 +1,47 @@
-# Convite de Formatura ✦
+# Convite de Formatura ✦ Matheus Serrão Uchôa
 
-Convite de formatura em página única (`index.html`), com estética inspirada na
-atmosfera de *Frieren: Beyond Journey's End* — céu crepuscular, magia, jornada.
+Convite de formatura em página única (`index.html`), implementação fiel do
+design **Convite Formatura.dc.html** criado no Claude Design — paleta clara
+estilo papel, tipografia Garamond e ilustração de capa em tela cheia.
 
-**Deploy:** https://maktheus.github.io/Convite-formatura-/
+**No ar:** https://maktheus.github.io/Convite-formatura-/
 
-## Recursos
+## Estrutura (do design)
 
-- **Tela de abertura com selo mágico** — instrui a aumentar o som e a tocar
-  nas pétalas; o convite abre com um clique no selo (o gesto também libera o
-  áudio, exigência dos navegadores).
-- **Animações**: estrelas piscando, pétalas ao vento, vaga-lumes dourados,
-  estrelas cadentes, círculos mágicos girando, auroras ao fundo, título com
-  brilho, revelação das seções ao rolar e contagem regressiva ao vivo.
-- **Pétalas interativas** — cada pétala cai pintada com um gradiente de matiz
-  aleatório; passar o dedo/cursor perto sopra as pétalas para o lado, e tocar
-  em uma faz com que ela exploda em fagulhas das próprias cores.
-- **Som ambiente sintetizado** — vento, acordes etéreos e sinos mágicos gerados
-  ao vivo com Web Audio API. É uma paisagem sonora **original**, inspirada no
-  clima contemplativo do anime (nenhuma faixa da trilha sonora é usada — a
-  trilha original é protegida por direitos autorais).
-- **Botões de ligar/desligar** (canto inferior direito): um para as animações e
-  outro para o som. As escolhas ficam salvas no navegador (`localStorage`) e a
-  página respeita `prefers-reduced-motion`.
+- **Hero** — ilustração de capa, "O fim de uma jornada. O início de muitas
+  outras." e a data 11 · 08 · 2026;
+- **História** — texto de convite;
+- **Formando** — Matheus Serrão Uchôa, Engenharia da Computação — UFAM;
+- **Detalhes** — data, horário (19h) e local (Auditório Eulálio Chaves,
+  UFAM) com botão "Ver no mapa";
+- **RSVP** — botões "Confirmo minha presença" / "Não poderei comparecer"
+  com mensagem de resposta;
+- **Citação final** com assinatura.
+
+## Camadas extras (sobre o design)
+
+- **Tela de abertura** — instrui a aumentar o som e a tocar nas pétalas;
+  o clique em "Abrir convite" libera o áudio (exigência dos navegadores).
+- **Trilha da jornada** — playlist do YouTube tocando num mini-player
+  oficial e discreto (canto inferior esquerdo). Se o player não carregar,
+  entra o som ambiente sintetizado do próprio design (vento + sinos, via
+  Web Audio API). Nenhum arquivo de áudio é distribuído no repositório.
+- **Pétalas interativas** — a física de queda é a do design; cada pétala
+  ganha um gradiente pastel de matiz aleatório, o cursor/dedo sopra as
+  pétalas e o toque as desfaz em fagulhas.
+- **Botões de ligar/desligar** som e animações (canto inferior direito),
+  persistidos em `localStorage`; a página respeita `prefers-reduced-motion`.
 - **Exibição sempre na horizontal** — em aparelhos na vertical o layout é
-  girado 90° via CSS (e, onde o navegador permite, `screen.orientation.lock`
-  trava a orientação em paisagem).
+  girado 90° via CSS (e `screen.orientation.lock` onde o navegador deixa).
+- **Revelação suave das seções** ao rolar.
 
-## Como personalizar
+## Personalização
 
-Procure pelos comentários `<!-- EDITE AQUI -->` no `index.html`:
-
-- Nome do formando e curso (seção *hero*);
-- Data, horário, local da cerimônia e da recepção (cards de *Detalhes*);
-- E-mail/link de confirmação de presença (botão *RSVP*);
-- Data-alvo da contagem regressiva (objeto `CONFIG` no início do `<script>`).
+- Playlist, densidade de pétalas e volume: objeto `CONFIG` no início do
+  `<script>` do `index.html`;
+- Textos e datas: direto nas seções do HTML.
 
 ## Deploy
 
-O deploy é automático: todo push na branch `main` dispara o workflow
-`.github/workflows/deploy-pages.yml`, que publica o site no GitHub Pages.
+Todo push na `main` dispara `.github/workflows/deploy-pages.yml`, que
+publica o site no GitHub Pages.
