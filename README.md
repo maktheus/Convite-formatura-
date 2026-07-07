@@ -26,9 +26,9 @@ estilo papel, tipografia Garamond e ilustração de capa em tela cheia.
   oficial e discreto (canto inferior esquerdo). Se o player não carregar,
   entra o som ambiente sintetizado do próprio design (vento + sinos, via
   Web Audio API). Nenhum arquivo de áudio é distribuído no repositório.
-- **Pétalas interativas** — a física de queda é a do design; cada pétala
-  ganha um gradiente pastel de matiz aleatório, o cursor/dedo sopra as
-  pétalas e o toque as desfaz em fagulhas.
+- **Folhas interativas** — a física de queda é a do design; cada folha
+  cai com um gradiente azul → dourado randomizado, o cursor/dedo sopra
+  as folhas e o clique/toque as desfaz em fagulhas azuis e douradas.
 - **Botões de ligar/desligar** som e animações (canto inferior direito),
   persistidos em `localStorage`; a página respeita `prefers-reduced-motion`.
 - **Versão mobile dedicada** — tipografia, espaçamentos, enquadramento da

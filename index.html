@@ -331,11 +331,17 @@
 
   /* ---------- versão mobile (retrato) ---------- */
   @media (max-width: 640px) {
-    .hero { min-height: 0; }
-    .hero img.capa { object-position: center; }   /* arte vertical centralizada */
+    /* hero com a mesma proporção da arte: imagem inteira, sem corte */
+    .hero {
+      height: auto; min-height: 0;
+      aspect-ratio: 941 / 1672;
+      max-height: var(--appH, 100vh);
+    }
+    /* se a tela for curta demais e houver corte, ancora no formando */
+    .hero img.capa { object-position: 72% center; }
     .hero .topo { padding-top: calc(34px + env(safe-area-inset-top, 0px)); }
     .hero .eyebrow { font-size: 14px; letter-spacing: 0.34em; }
-    .hero .base { bottom: 9vh; }
+    .hero .base { bottom: 6%; }
     .hero h1 { font-size: clamp(36px, 10vw, 48px); }
     .hero .data-row { margin-top: 20px; gap: 12px; }
     .hero .data-row .fio { width: 28px; }
@@ -519,7 +525,7 @@
     <h2>Matheus Serrão Uchôa</h2>
     <div class="intro-tips">
       <div class="tip"><span class="ico">♪</span><span><em>Aumente o som</em> do aparelho — a trilha da jornada toca junto com o convite.</span></div>
-      <div class="tip"><span class="ico">✦</span><span><em>Toque nas pétalas</em> que caem pela tela — elas reagem a você.</span></div>
+      <div class="tip"><span class="ico">✦</span><span><em>Toque nas folhas</em> azuis e douradas que caem pela tela — elas reagem a você.</span></div>
     </div>
     <button class="btn-abrir" id="open-btn">Abrir convite ✦</button>
     <p class="mini">som e animações podem ser desligados a qualquer momento</p>
@@ -579,9 +585,13 @@
   }
 
   function newPetal(spread) {
-    // matiz pastel aleatório, na paleta suave do design
-    const hue = Math.floor(Math.random() * 360);
-    const alpha = 0.35 + Math.random() * 0.4;
+    // cada folha ganha um gradiente azul → dourado, randomizado
+    const blueHue = 205 + Math.random() * 30;   // azuis (205–235)
+    const goldHue = 38 + Math.random() * 14;    // dourados (38–52)
+    const alpha = 0.5 + Math.random() * 0.35;
+    const flip = Math.random() < 0.5;           // metade começa pelo dourado
+    const cBlue = `hsla(${blueHue}, 60%, ${52 + Math.random() * 12}%, ${alpha})`;
+    const cGold = `hsla(${goldHue}, 66%, ${46 + Math.random() * 12}%, ${alpha})`;
     return {
       x: Math.random() * W,
       y: spread ? Math.random() * H : -20,
@@ -590,13 +600,13 @@
       px: 0,                                  // empurrão do toque
       vr: (Math.random() - 0.5) * 0.02,
       rot: Math.random() * Math.PI * 2,
-      size: 4 + Math.random() * 5,
+      size: 5 + Math.random() * 6,
       alpha,
       speed: 0.6 + Math.random(),
       t: Math.random() * 100,
-      hue,
-      c1: `hsla(${hue}, 38%, 84%, ${alpha})`,
-      c2: `hsla(${(hue + 50) % 360}, 34%, 70%, ${alpha * 0.55})`,
+      blueHue, goldHue,
+      c1: flip ? cGold : cBlue,
+      c2: flip ? cBlue : cGold,
       dx: 0, dy: 0,
     };
   }
@@ -611,13 +621,17 @@
     grad.addColorStop(0, p.c1);
     grad.addColorStop(1, p.c2);
     cx.fillStyle = grad;
+    // formato de folha: duas curvas com pontas
+    const L = p.size, Wd = Math.max(p.size * 0.5 * wobble, 0.8);
     cx.beginPath();
-    cx.ellipse(0, 0, p.size, p.size * 0.45 * wobble, 0, 0, Math.PI * 2);
+    cx.moveTo(-L, 0);
+    cx.quadraticCurveTo(0, -Wd, L, 0);
+    cx.quadraticCurveTo(0, Wd, -L, 0);
     cx.fill();
     cx.restore();
   }
 
-  function burstAt(x, y, hue, n) {
+  function burstAt(x, y, blueHue, goldHue, n) {
     for (let i = 0; i < n; i++) {
       const a = Math.random() * Math.PI * 2;
       const sp = 0.7 + Math.random() * 2.2;
@@ -628,8 +642,8 @@
         r: 1.2 + Math.random() * 2,
         life: 1,
         color: Math.random() < 0.5
-          ? `hsla(${hue}, 45%, 62%, `
-          : "hsla(43, 42%, 53%, ",       // dourado do design
+          ? `hsla(${blueHue}, 55%, 58%, `
+          : `hsla(${goldHue}, 62%, 50%, `,
       });
     }
     if (sparks.length > 300) sparks = sparks.slice(-300);
@@ -679,8 +693,8 @@
     for (const pt of petals) {
       const ddx = pt.dx - p.x, ddy = pt.dy - p.y;
       const d2 = ddx * ddx + ddy * ddy;
-      if (isTap && d2 < 44 * 44) {
-        burstAt(pt.dx, pt.dy, pt.hue, 12);
+      if (isTap && d2 < 48 * 48) {
+        burstAt(pt.dx, pt.dy, pt.blueHue, pt.goldHue, 14);
         Object.assign(pt, newPetal(false));
       } else if (!isTap && d2 < 60 * 60 && d2 > 0.01) {
         const d = Math.sqrt(d2);
